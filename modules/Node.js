@@ -12,5 +12,18 @@ export class Node extends Element
     {
         super.draw(ctx);
         this.symbol.draw(this.bounds, ctx);
+        if (this.text)
+        {
+            this.text.draw(ctx);
+        }
+    }
+
+    movedBy(handle, x, y)
+    {
+        super.movedBy(handle, x, y);
+        if (this.text)
+        {
+            this.text.movedBy(handle, x, y);
+        }
     }
 }

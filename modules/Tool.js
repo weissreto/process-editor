@@ -17,7 +17,7 @@ export class Tool
     {
     }
 
-    draw(ctx)
-    {
+    onKeyDown(event)
+    {        
     }
 }

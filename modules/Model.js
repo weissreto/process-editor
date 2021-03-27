@@ -22,6 +22,13 @@ export class Model
         this.changed();
     }
 
+    addText(element, text)
+    {
+        element.text = text;
+        text.onChange(() => this.changed());
+        this.changed();
+    }
+
     remove(element)
     {
         let index = this.elements.indexOf(element);
@@ -35,7 +42,7 @@ export class Model
                 .filter(edge => this.referencesElement(edge, element))
                 .forEach(edge => this.remove(edge));
         }
-    }
+    }    
 
     referencesElement(edge, element)
     {

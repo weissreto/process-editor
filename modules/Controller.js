@@ -7,6 +7,8 @@ export class Controller
         canvas.onmousedown = (event) => this.onMouseDown(event);
         canvas.onmouseup = (event) => this.onMouseUp(event);
         canvas.onmousemove = (event) => this.onMouseMove(event);
+        canvas.tabIndex=1;
+        canvas.onkeydown = (event) => this.onKeyDown(event);
         this.model = model;
         this.tool = new SelectionTool(model);
     }
@@ -32,6 +34,15 @@ export class Controller
     onMouseUp(event)
     {
         var newTool = this.tool.onMouseUp(event);
+        if (newTool != null)
+        {
+            this.tool = newTool;
+        }
+    }
+
+    onKeyDown(event)
+    {
+        let newTool = this.tool.onKeyDown(event);
         if (newTool != null)
         {
             this.tool = newTool;

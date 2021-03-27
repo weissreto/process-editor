@@ -1,6 +1,7 @@
 import { AddNodeTool } from "./AddNodeTool.js"
 import { AddEdgeTool } from "./AddEdgeTool.js"
 import { DeleteTool } from "./DeleteTool.js"
+import { TextTool } from "./TextTool.js"
 import { Bounds } from "./Bounds.js";
 import { End, Task } from "./Symbol.js";
 export class Menu
@@ -14,7 +15,8 @@ export class Menu
             new AddNode(this.boundsFor(0), new Task()), 
             new AddNode(this.boundsFor(1), new End()),
             new AddEdge(this.boundsFor(2)),
-            new Delete(this.boundsFor(3))
+            new Text(this.boundsFor(3)),
+            new Delete(this.boundsFor(4))
         ];
     }
 
@@ -150,5 +152,29 @@ class Delete extends MenuItem
     getTool(model, x, y)
     {
         return new DeleteTool(model);
+    }
+}
+
+class Text extends MenuItem
+{
+    constructor(bounds)
+    {
+        super(bounds);
+    }
+
+    drawIcon(ctx)
+    {
+        ctx.save();
+        ctx.fillStyle = "blue";
+        ctx.font = "15px serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("T", this.bounds.centerX(), this.bounds.centerY());
+        ctx.restore();
+    }
+
+    getTool(model, x, y)
+    {
+        return new TextTool(model)
     }
 }

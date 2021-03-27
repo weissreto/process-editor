@@ -27,6 +27,10 @@ export class Edge extends Element
             end = this.to.bounds.center();
         }
         this.bounds = Bounds.bounds(start, end);
+        if (this.text)
+        {
+            this.text.bounds = this.bounds;
+        }
     }
 
     nodeChanged()
@@ -67,7 +71,19 @@ export class Edge extends Element
         ctx.lineTo(x2 + dx2, y2 + dy2);
         ctx.stroke();
         ctx.closePath();
+        if (this.text)
+        {
+            this.text.draw(ctx);
+        }
     }
 
+    movedBy(handle, x, y)
+    {
+        super.movedBy(handle, x, y);
+        if (this.text)
+        {
+            this.text.movedBy(handle, x, y);
+        }
+    }
 }
 
